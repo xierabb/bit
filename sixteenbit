@@ -1,0 +1,16 @@
+#include <stdio.h>
+// 16-BIT CHECKSUM
+int main(void) {
+    char data[] = "AAAAAAAAAA\nX";
+    int sum = 0;
+    int i;
+    for(i = 0; data[i] != '\0' && data[i + 1] != '\0'; i += 2) {
+        int value = ((unsigned char)data[i] << 8) | (unsigned char)data[i + 1];
+        sum = (sum + value) & 0xffff;
+    }
+    printf("%04x\n", sum);
+    return 0;
+}
+//RESULT IS SUPPOSED TO BE: `509d`
+//RESULT COMES OUT AS:      `509d`
+
